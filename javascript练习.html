@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    <!--找出str里面的字符e并打印其下标  没找到返回-1  -->
+//    方法一
+/*    var str = 'abcdefghijklmn';
+    for(var i = 0;i<str.length;i++){
+        if(str.charAt(i) === 'e'){
+            console.log(i);
+            break;
+        }
+    }
+    if(i === str.length){
+        console.log(-1);
+    }*/
+
+//方法二    console.log(str.indexOf('e'));
+
+//    将上边的功能分装为 indexOf 函数
+
+//    function indexOf(str, search) {
+//        for (var i = 0; i < str.length; i++) {
+//            if (str.charAt(i) === search) {
+//                return i;
+//            }
+//        }
+//        return -1;
+//    }
+//    console.log(indexOf('abcdefg','f'));
+
+
+//    js中没有明确的继承语法，一般都是按照继承的理念实现对象的成员扩充实现继承
+//    因此js中实现继承的方法非常多，其中最简单的方法是混入（mix）
+/*    function mix(o1, o2) {
+        for (var k in o2) {
+            o1[k] = o2[k];
+        }
+    }
+
+    var o1 = {name:'张三'};
+    var o2 = {age:18};
+    console.log(o1);
+    mix(o1,o2);
+    console.log(o1);*/
+
+//任务：创建一个div标签 加到页面中  设置div的样式
+// 方法一  传统的方法
+//    var div = document.createElement('div');
+//    document.body.appendChild(div);
+//    div.style.border = '1px dashed red';
+//    div.style.width = '400px';
+//    div.style.height = '300px';
+
+// 方法二  使用面向对象的方法
+/*    function DivTag() {
+        this.DOM = document.createElement('div');
+        this.appendTo = function(node){
+            node.appendChild(this.DOM);
+            return this;
+        }
+        this.css = function(option){
+            for(var k in option){
+                this.DOM.style[k] = option[k];
+            }
+            return this;
+        }
+    }
+
+    new DivTag().appendTo(document.body).css({
+        border:'1px dashed red',
+        width:'300px',
+        height:'200px'
+    })*/
+
+
+// 深拷贝与浅拷贝
+// 深拷贝：拷贝的对象在内存中单独存在   也就是说是在内存中有两份
+// 浅拷贝：只拷贝对象的引用（地址）
+
+/*  浅拷贝示例
+    var p = {
+        name:'张三',
+        age:18,
+        gender:'男',
+        copy: function () { // 将当前对象拷贝一份
+            //1 创建对象
+            var temp = {};
+            //2 复制属性
+            for( var k in this){
+                temp[k] = this[k];
+            }
+            //3 返回对象
+            return temp;
+        }
+    };
+
+    var p2 = p.copy();
+    //使用断点调试
+    p.name = '李四';
+    p.age=20;
+    p.gender = '女';*/
+
+
+
+// ------------------------------------------------------------------
+/*  深拷贝示例*/
+  /*  var deepCopy = function(){
+        //1 创建对象
+        var temp = {};
+        //2 复制属性 判断如果是引用类型需要深拷贝
+        for( var k in this){
+            if(typeof this[k] === 'object' ){
+                temp[k] = this[k].deepCopy();
+            }else{
+                temp[k] = this[k];
+            }
+        }
+        //3 返回对象
+        return temp;
+    }
+
+    var car = {name : '法拉利'};
+    var p = {
+        name:'张三',
+        age:18,
+        gender:'男',
+        car:car
+    };
+
+    //写一个deepCopy 函数，每一个对象都使用 对象.deepCopy = deepCopy;
+    //来使得当前对象具有拷贝的方法，那么就可以实现深拷贝了
+    car.deepCopy = deepCopy;
+    p.deepCopy = deepCopy;
+
+    var newP = p.deepCopy();
+
+    p.name = '王五';
+    p.age = 22;
+    p.gender = '女';
+    p.car.name = '兰博基尼';
+    */
+// ------------------------------------------------------------------
+
+
+
+//  构造函数的作用
+/*
+    1.初始化数据
+*   2.在js中  给对象添加属性用的，初始化属性值用
+*
+*   创建对象的过程
+*   1.代码：  var p = new Person();
+*   2. 首先运算符new 创建了一个对象。它类似于｛｝,是一个没有任何成员的对象
+*      使用new创建对象，对象的类型就是创建它的构造函数名
+*      使用｛｝无论如何都是Object类型，相当于 new Object()
+* */
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
