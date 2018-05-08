@@ -161,9 +161,118 @@
 *      使用｛｝无论如何都是Object类型，相当于 new Object()
 * */
 
+/*    onload = function () {
+        var table = document.createElement('table');
+        var tbody = document.createElement('tbody');
+        table.appendChild(tbody);
+        for (var i = 0; i < 4; i++) {
+            var tr = document.createElement('tr');
+            for (var j = 0; j < 3; j++) {
+                var td = document.createElement('td');
+                td.setAttribute('width', '100px');
+                td.setAttribute('height', '30px');
+                td.style.border = '1px solid yellowgreen';
+                var text = document.createTextNode('');
+                td.appendChild(text);
+                tr.appendChild(td);
+            }
+            tbody.appendChild(tr);
+        }
+        table.style.border = '1px solid red';
+        document.body.appendChild(table);
+    }*/
+
+/*    function sayHello() {
+        console.log('   ...    ');
+    }
+
+    function Person(name,age,gender) {
+        this.name = name;
+        this.age = age ;
+        this.gender = gender;
+        this.sayHello = sayHello;
+    }
+
+    var p1 = new Person(name,12,'男');
+    var p2 = new Person();
+    console.log(p1.sayHello == p2.sayHello)*/
+
+
+    onload = function () {
+
+        var data = [{name:'张三1',age:18,gender:'male'},
+                    {name:'张三2',age:19,gender:'female'},
+                    {name:'张三3',age:16,gender:'male'},
+                    {name:'张三4',age:18,gender:'female'}];
+
+        var table = document.createElement('table');
+        var thead = document.createElement('thead');
+        var tbody = document.createElement('tbody');
+        table.appendChild(thead);
+        table.appendChild(tbody);
+
+        var trHead = document.createElement('tr');
+        thead.appendChild(trHead);
+        //写 表头
+        for(var k in data[0]){
+            var th = document.createElement('th');
+            th.appendChild(document.createTextNode( k ));
+            th.setAttribute('width', '100px');
+            th.setAttribute('height', '30px');
+            th.style.border = '1px solid yellowgreen';
+            th.style.textAlign = 'center';
+            trHead.appendChild(th);
+        }
+
+
+        //写数据
+        for (var i = 0; i < data.length; i++) {
+            var tr = document.createElement('tr');
+            for (var j in data[i]) {
+                var td = document.createElement('td');
+                td.setAttribute('width', '100px');
+                td.setAttribute('height', '30px');
+                td.style.border = '1px solid yellowgreen';
+                td.style.textAlign = 'center';
+                var text = document.createTextNode( data[i][j] );
+                td.appendChild(text);
+                tr.appendChild(td);
+            }
+            tbody.appendChild(tr);
+        }
+        table.style.border = '1px solid red';
+        document.body.appendChild(table);
+    }
 
 
 
+
+  /*  onload = function () {
+//        原型继承
+        var Person = function (){}
+        Person.prototype.extend = function (o){
+            for(var k in o){
+                this[k] = o[k];
+            }
+        };
+
+        Person.prototype.extend({
+            run:function () {
+                console.log('我是run');
+            },
+            eat:function () {
+                console.log('我是eat');
+            },
+            sayHello:function () {
+                console.log('你好啊');
+            }
+        });
+
+        var p1 = new Person();
+        p1.run();
+        p1.eat();
+        p1.sayHello();
+    }*/
 
 
 

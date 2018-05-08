@@ -1,0 +1,192 @@
+DOM操作
+从一个中心元素访问其所有的直系亲属元素
+	访问父节点 parentNode
+	访问上一个兄弟节点  previousSibling
+	访问下一个兄弟节点  nextSibling
+	访问第一个属性节点  attributes[1]
+	访问最后一个子节点  lastChild或 childNodes[childNodes.length-1]
+
+
+
+###获取元素	
+	
+1.标准DOM API 	
+	document.getElementById
+	document.getElementsByTagName
+	document.getElementsByName
+	document.getElementsByClassName
+	document.querySelectAll    低版本浏览器不兼容
+2.亲属访问
+3.属性获取
+	getAttribute
+	getAttributeNode
+
+
+###增加元素	
+1.创建	
+	document.createElement  创建元素
+	document.createTextNode 创建节点
+	document.createAttribute 属性节点
+	innerHTML
+	innerText
+	cloneNode()
+2.加入
+	appendChild 	追加到结尾处
+	insertBefore	将元素追加到某一个元素的前边
+	             父元素.insertBefore(新元素,旧元素)
+3.其他  
+	style  的操作
+	setAttribute(属性名,属性值) 
+	
+	
+###删除元素		
+1.删除元素
+	removeChild			删除元素
+	removeAttribute 	删除属性
+	removeAttributeNode
+
+###修改元素		
+1.修改节点
+	删除节点再加入
+	
+2.修改样式
+	style.xxx = xxx;
+	setAttribute
+3.修改文本
+	innerHTML
+	innerText  早期的火狐不支持
+	节点操作
+	nodeValue
+4.修改属性
+	.xxx = vvv 
+	setAttribute
+	
+===============================================	
+常见的节点属性
+nodeValue	表示节点的值，所有的节点都有该属性，一般文本节点才使用该属性
+	document.body.lastChild.nodeValue = 'hello';
+	
+nodeName	表示节点的名字，虽然所有的节点都有该属性，但是一般元素节点才使用
+	元素节点打印的元素名均为大写字母
+	alert(document.body.nodeName );
+	
+	document.body.getAttributeNode('name');
+	document.body.attributes[0];
+	
+nodeType	节点类型
+	
+	onload = function(){
+		var div = document.querySelectAll('#dv')[0];
+		//1 使用setAttribute添加属性
+		div.setAttribute('itcast','传智博客');
+		
+		//2 使用 .xxx = vvv 
+		div.className = 'c';
+		
+		//3 使用DOM节点方法  万能的
+		var attr = document.createAttribute('test');
+		attr.nodeValue = '测试';
+		div.setAttributeNode(attr);
+		
+		
+		//删除 
+		var ck = document.querySelectAll('#ck')[0];
+		//1.
+		ck.removeAttribute('checked');
+		//2.
+		ck.removeAttributeNode(ck.getAttributeNode('#ck'));
+		//3.
+		ck.checked = false;//先将字符串转换成boolean再赋值
+		//一定要使用true 和 false 
+		
+		//修改 
+		
+		//查询
+		
+	}
+
+=====================================
+###  原型 prototype
+问题？？？
+1.代码中重复执行的代码容易出现重复的对象
+2.传统的构造方法中的定义方式会影响性能，容易造成多个对象
+  有多个方法副本，应该将方法抽离出来，让所有对象共享
+3.可以考虑将方法全部放到外面但是有安全隐患
+	*在开发中会引入各种框架或类库。自定义的成员越多，出现命名冲突的几率越大
+	*可能在开发中会有多个构造函数。那么每一个构造函数应该有多个方法，那么不容易维护。
+4.任意的一个对象都会默认的连接到它的原型中
+	*创建一个函数，会附带创建一个特殊的对象。该对象使用 函数.prototype 引用.称为函数的原型属性
+	*每一个由该函数作为构造函数创建的对象。都会默认的连接到该对象上。
+	*在该对象访问某一个方法或属性的时候，如果该对象中没有，会到这个神秘的对象中去查找。
+
+	var f1 = new Foo();
+	var f2 = new Foo();
+	f1.sayHello();// 如果f1没有sayHelo，那么就会在Foo.prototype中去找
+	f2.sayGoodbye();//如果f2没有sayGoodbye,那么就会在Foo.prototype中找
+
+5.由构造函数创建出来的众多对象共享一个对象，就是 构造函数.prototype
+6.只需要将共享的东西，重复会多占用内存的东西放到 构造函数.prototype中，那么所有对象都可以共享了
+
+	function Foo(){}
+	Foo.prototype.sayHello = function(){ console.log("111");  }
+	var f1 = new Foo();
+	f1.sayHello();
+	var f2 = new Foo();
+	f2.sayHello();
+	f1.sayHello === f2.sayHello  //true
+
+
+	for(var k in data[0]){
+		var th = document.createElement('th');
+		th.appendChild(document.createTextNode( k ));
+		trHead.appendChild(th);
+	}
+
+#  __proto__ 
+以前要访问原型，必须使用构造函数来实现。无法直接使用实例对象来访问原型。
+火狐最早引用属性 '__proto__'  表示使用实例对象引用原型，早期是非标准的
+
+通过该属性可以允许使用实例对象直接访问原型
+
+
+
+继承的概念(inherit)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+ 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
